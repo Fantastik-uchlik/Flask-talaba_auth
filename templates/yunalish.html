@@ -3,107 +3,131 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yunalishlar bo`limi</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 
-<body>
+<body> 
+     {% include "header.html" %}
     <div class="container">
-        {% include "header.html" %}
+      
         <h1>Yunalishlar</h1>
+        <div class="col">
+            <hr>
+            {% if yunalish %}
 
-        <hr>
-        {% if yunalish %}
-        <div class="card">
+            <div class="col-12 col-md-6">
+                <div class="card">
 
-            <div class="card-header">{{yunalish.id}} - id li yunalishni tahrirlash</div>
-            <div class="card-body">
-                <form action="/yunalish/tahrirlash" method="post">
-                    <div class="form-group">
-                        <label for="id">ID: </label>
-                        <input class="form-control" type="text" name="id" id="id" value="{{yunalish.id}}" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="nom">Nom: </label>
-                        <input class="form-control" type="text" name="nom" id="nom" value="{{yunalish.nom}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="kod">Kod: </label>
-                        <input type="text" class="form-control" name="kod" id="kod" value="{{yunalish.kod}}">
-                    </div>
-                    <div class="form-group">
-                        <label for="izoh">Izoh: </label>
-                        <textarea class="form-control" name="izoh" id="izoh" data-value="{{yunalish.izoh}}">
+                    <div class="card-header">{{yunalish.id}} - id li yunalishni tahrirlash</div>
+                    <div class="card-body">
+                        <form action="/yunalish/tahrirlash" method="post">
+                            <div class="form-group">
+                                <label for="id">ID: </label>
+                                <input class="form-control" type="text" name="id" id="id" value="{{yunalish.id}}"
+                                    readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nom">Nom: </label>
+                                <input class="form-control" type="text" name="nom" id="nom" value="{{yunalish.nom}}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="kod">Kod: </label>
+                                <input type="text" class="form-control" name="kod" id="kod" value="{{yunalish.kod}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="izoh">Izoh: </label>
+                                <textarea class="form-control" name="izoh" id="izoh" data-value="{{yunalish.izoh}}">
                 </textarea>
-                    </div>
-                    <input type="submit" value="Tahrirlash">
-                    <button><a href="/yunalish">Bekor qilish</a></button>
-                </form>
+                            </div>
+                            <input type="submit" value="Tahrirlash">
+                            <button><a href="/yunalish">Bekor qilish</a></button>
+                        </form>
 
+                    </div>
+                </div>
             </div>
-        </div>
 
 
 
-        {% else %}
-        <h2>Yunalish qo'shish</h2>
-        <div class="card">
-            <div class="card-body">
-                <form action="/yunalish" method="post">
-                    <div class="form-group">
-                        <label for="nom">Nom: </label>
-                        <input class="form-control" placeholder="Yunalish nomi" type="text" name="nom" id="nom">
+            {% else %}
+
+            <div class="col-12 col-md-6">
+
+                <h2 style="color: blue;"><i class="fa fa-plus" aria-hidden="true"></i>
+                    Yo`nalish qo'shish</h2>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/yunalish" method="post">
+                            <div class="form-group">
+                                <label for="nom">Nom: </label>
+                                <input class="form-control" placeholder="Yunalish nomi" type="text" name="nom" id="nom">
+                            </div>
+                            <div class="form-group">
+                                <label for="kod">Kod: </label>
+                                <input class="form-control" placeholder="Yunalish kod" type="text" name="kod" id="kod">
+                            </div>
+                            <div class="form-group">
+                                <label for="izoh">Izoh: </label>
+                                <textarea class="form-control" placeholder="Fikringizni qoldiring" name="izoh"
+                                    id="izoh"> </textarea>
+                            </div>
+                            <input type="submit" value="Saqlash">
+                            <input type="reset" value="Tozalash">
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="kod">Kod: </label>
-                        <input class="form-control" placeholder="Yunalish kod" type="text" name="kod" id="kod">
-                    </div>
-                    <div class="form-group">
-                        <label for="izoh">Izoh: </label>
-                        <textarea class="form-control" placeholder="Fikringizni qoldiring" name="izoh"
-                            id="izoh"> </textarea>
-                    </div>
-                    <input type="submit" value="Saqlash">
-                    <input type="reset" value="Tozalash">
-                </form>
-            </div>
-        </div>
-        {% endif %}
-        <h2>Yunalishlar ro'yxati</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Kod</th>
-                    <th>Izoh</th>
-                    <th></th>
-                </tr>
-            </thead>
+                </div>
 
-            <tbody>
-                {% if yunalishlar %}
-                {% for y in yunalishlar %}
-
-                <tr>
-                    <td>{{y.id}}</td>
-                    <td>{{y.nom}}</td>
-                    <td>{{y.kod}}</td>
-                    <td>{{y.izoh}}</td>
-                    <td><a href="/yunalish/ochirish?id={{y.id}}"><button class="class=btn btn-primary">O'chirish
-                            </button></a>
-                        <a href="/yunalish?tahrirlash={{y.id}}"><button
-                                class="class=btn btn-primary">Tahrirlash</button></a>
-                    </td>
-                </tr>
-                {% endfor %}
                 {% endif %}
-            </tbody>
-        </table>
-    </div>
+               
+            <div class="col-12 col-md-6">
+
+                <h2 style="color: blue;"><i class="fa fa-server" aria-hidden="true"></i>
+                    Yo`nalishlar ro`yhati</h2>
+                <div class="container">
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nom</th>
+                                <th>Kod</th>
+                                <th>Izoh</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if yunalishlar %}
+                            {% for y in yunalishlar %}
+
+                            <tr>
+                                <td>{{y.id}}</td>
+                                <td>{{y.nom}}</td>
+                                <td>{{y.kod}}</td>
+                                <td>{{y.izoh}}</td>
+                                <td>
+                                    <a href="/yunalish/ochirish?id={{y.id}}"><i style="color: red;" class="fa fa-trash"
+                                            aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                    <a href="/yunalish?tahrirlash={{y.id}}"><i style="color: green;"
+                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 

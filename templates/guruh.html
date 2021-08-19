@@ -7,141 +7,168 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
     <div class="container">
         {% include "header.html" %}
-        <h1>Guruhlar</h1>
+        <h1>Guruhlar bo`limi</h1>
         <hr>
-        <h2>Guruh qo'shish</h2>
-        {% if guruh %}
-        <div class="card">
-            <h3>
-                <div class="card-header">{{ guruh.id }} - id li guruhni tahrirlash </div>
-            </h3>
-            <div class="card-body">
-                <form action="/guruh" method="post">
-                    <div class="form-group">
-                        <label for="id">ID: </label>
-                        <input class="form-control" type="text" value="{{guruh.id}}" name="id" id="id" readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="nom">Nom: </label>
-                        <input class="form-control" type="text" value="{{guruh.nom}}" name="nom" id="nom">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="yunalish_id">Yunalish: </label>
-                        <select class="form-control" name="yunalish_id" id="yunalish_id">
-                            <option value="" selected disabled hidden>Yunalishni tanlang</option>
-                            {% if yunalishlar %}
-                            {% for y in yunalishlar %}
-                            <option value="{{y.id}}" {% if y.id == guruh.yunalish_id%} selected {% endif %}>{{y.kod}} - {{y.nom}}
-                            </option>
-                            {% endfor %}
-                            {% endif %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="til">Til: </label>
-
-                        <select class="form-control" name="til" id="til">
-                            <option value="" selected disabled hidden>Tilni tanlang</option>
-                            <option value="O`zbek tili">O`zbek tili</option>
-                            <option value="Русский">Русский</option>
-                            <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
-                            <option value="Ingliz tili">Ingliz tili</option>
-                            <option value="boshqa tillar">boshqa tillar</option>
-                            <option value="{{guruh.til}}" selected>{{guruh.til}}</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="yil">Yil: </label>
-                        <input class="form-control" name="yil" id="yil" value="{{guruh.yil}}" />
-                    </div>
-                    <input type="submit" value="Saqlash">
-                    <input type="reset" value="Tozalash">
-                </form>
-            </div>
-        </div>
-        {% else %}
+        <div class="row">
+            <div class="col-6">
+                <h1>Guruhlar bo`limi</h1>
+                <h2 style="color: blue;"><i class="fa fa-users" aria-hidden="true"></i>
+                    Guruh qo'shish</h2>
 
 
-        <div class="card">
-            <div class="card-body">
-                <form action="/guruh" method="post">
-                    <div class="form-group">
-                        <label for="nom">Nom: </label>
-                        <input placeholder="Guruhni nomi yoki raqamini kiriting" class="form-control" type="text"
-                            name="nom" id="nom">
+                {% if guruh %}
+                <div class="card">
+                    <h3>
+                        <div class="card-header">{{ guruh.id }} - id li guruhni tahrirlash </div>
+                    </h3>
+                    <div class="card-body">
+                        <form action="/guruh" method="post">
+                            <div class="form-group">
+                                <label for="id">ID: </label>
+                                <input class="form-control" type="text" value="{{guruh.id}}" name="id" id="id" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="nom">Nom: </label>
+                                <input class="form-control" type="text" value="{{guruh.nom}}" name="nom" id="nom">
 
-                    </div>
-                    <div class="form-group">
-                        <label for="yunalish">Yunalish: </label>
-                        <select class="form-control" name="yunalish_id" id="yunalish">
-                            {% if yunalishlar %}
-                            {% for y in yunalishlar %}
-                            <option value="{{y.id}}">{{y.nom}}</option>
-                            {% endfor %}
-                            {% endif %}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="til">Til: </label>
-                        <select class="form-control" placeholder="Tilni tanlang" name="til" id="til">
-                            <option value="" selected disabled hidden>Tilni tanlang</option>
-                            <option value="O`zbek tili">O`zbek tili</option>
-                            <option value="Русский">Русский</option>
-                            <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
-                            <option value="Ingliz tili">Ingliz tili</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="yil">Yil: </label>
-                        <input class="form-control" name="yil" id="yil" />
-                    </div>
-                    <input type="submit" value="Tahrirlash">
-                    <button> <a href="/guruh">Bekor qilish</a></button>
-                </form>
-            </div>
-        </div>
-        {% endif %}
-        <h2>Guruhlar ro'yxati</h2>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Yunalish</th>
-                    <th>Til</th>
-                    <th>Yil</th>
-                    <th></th>
-                </tr>
-            </thead>
+                            </div>
+                            <div class="form-group">
+                                <label for="yunalish_id">Yunalish: </label>
+                                <select class="form-control" name="yunalish_id" id="yunalish_id">
+                                    <option value="" selected disabled hidden>Yunalishni tanlang
+                                    </option>
+                                    {% if yunalishlar %}
+                                    {% for y in yunalishlar %}
+                                    <option value="{{y.id}}" {% if y.id==guruh.yunalish_id%} selected {% endif %}>
+                                        {{y.kod}} -
+                                        {{y.nom}}
+                                    </option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="til">Til: </label>
 
-            <tbody>
-                {% if guruhlar %}
-                {% for y in guruhlar %}
+                                <select class="form-control" name="til" id="til">
+                                    <option value="" selected disabled hidden>Tilni tanlang</option>
+                                    <option value="O`zbek tili">O`zbek tili</option>
+                                    <option value="Русский">Русский</option>
+                                    <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
+                                    <option value="Ingliz tili">Ingliz tili</option>
+                                    <option value="boshqa tillar">boshqa tillar</option>
+                                    <option value="{{guruh.til}}" selected>{{guruh.til}}</option>
 
-                <tr>
-                    <td>{{y.id}}</td>
-                    <td>{{y.nom}}</td>
-                    <td>{{y.yunalish.nom}}</td>
-                    <td>{{y.til}}</td>
-                    <td>{{y.yil}}</td>
-                    <td><a href="/guruh/ochirish?id={{y.id}}"><button class="class=btn btn-primary">O'chirish
-                            </button></a>
-                        <a href="/guruh?tahrirlash={{y.id}}"><button
-                                class="class=btn btn-primary">Tahrirlash</button></a>
-                    </td>
-                    </td>
-                </tr>
-                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="yil">Yil: </label>
+                                <input class="form-control" name="yil" id="yil" value="{{guruh.yil}}" />
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Tahrirlash">
+                            <a class="btn btn-secondary" href="/guruh">Bekor qilish </a> 
+
+                        </form>
+                    </div>
+                </div>
+                {% else %}
+
+
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/guruh" method="post">
+                            <div class="form-group">
+                                <label for="nom">Nom: </label>
+                                <input placeholder="Guruhni nomi yoki raqamini kiriting" class="form-control"
+                                    type="text" name="nom" id="nom">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="yunalish">Yunalish: </label>
+                                <select class="form-control" name="yunalish_id" id="yunalish">
+                                    {% if yunalishlar %}
+                                    {% for y in yunalishlar %}
+                                    <option value="{{y.id}}">{{y.nom}}</option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="yil">Yil: </label>
+                                <input class="form-control" name="yil" id="yil" />
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Saqlash">
+                            <input class="btn btn-secondary" type="reset" value="Tozalash">
+                        </form>
+                    </div>
+                </div>
                 {% endif %}
-            </tbody>
-        </table>
+
+            </div>
+            <div class="col-6">
+
+
+                
+                <h2 style="color: blue;"><i class="fa fa-server" aria-hidden="true"></i> Guruhlar
+                    ro'yxati</h2>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nom</th>
+                                        <th>Yunalish</th>
+                                        <th>Til</th>
+                                        <th>Yil</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% if guruhlar %}
+                                    {% for y in guruhlar %}
+
+                                    <tr>
+                                        <td>{{y.id}}</td>
+                                        <td>{{y.nom}}</td>
+                                        <td>{{y.yunalish.nom}}</td>
+                                        <td>{{y.til}}</td>
+                                        <td>{{y.yil}}</td>
+                                        <td>
+                                            <a href="/guruh/ochirish?id={{y.id}}"><i style="color: red;"
+                                                    class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                                            <a href="/guruh?tahrirlash={{y.id}}"><i style="color: green;"
+                                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
     </div>
 </body>
 

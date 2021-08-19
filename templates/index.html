@@ -9,17 +9,82 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 </head>
+<style>
+    body {
+        background-color: blue;
+    }
+
+    .loading {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+
+        z-index: 9999;
+        top: 0;
+
+        text-align: center;
+    }
+
+    .loading div {
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        border-top: dashed 5px blue;
+        border-right: dashed 5px rgb(43, 255, 0);
+        border-bottom: dashed 5px rgb(255, 145, 0);
+        border-left: dashed 5px rgb(255, 0, 0);
+        border-radius: 50%;
+        margin-top: 280px;
+        animation: aylan 0.9s;
+        animation-iteration-count: infinite;
+        animation-fill-mode: backwards;
+    }
+
+    @keyframes aylan {
+        from {}
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes yuqol {
+        from {}
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    h4 {
+        color: white;
+    }
+  
+</style>
 
 <body>
-    <div class="container">
-        {% include "header.html" %}
-        <h1>Talabalar bilan ishlash bo`limi</h1>
-        <ul>
-            <li><a href="/yunalish">Yo`nalishlar</a></li>
-            <li><a href="/guruh">Guruhlar</a></li>
-            <li><a href="/talaba">Talabalar</a></li>
-        </ul>
+    <div style="background-color: rgba(255, 255, 255, 0.979);" class="loading">
+        <div></div>
+        <h1 style="  color: black; font-family: cursive;">Iltimos kutib turing....</h1>
     </div>
+    <div id="header">
+
+        <div class="container">
+            {% include "header.html" %}
+            <h1>Talabalar bilan ishlash bo`limi</h1>
+            <h1 style="text-align: center;font-family: cursive;">Talabalar bilan ishlash platformasiga hush kelibsiz</h1>
+            <ul>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="/yunalish" role="button">Yo`nalish</a><br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="/guruh" role="button">Guruh</a><br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="/talaba" role="button">Talaba</a><br><br>
+               
+            </ul>
+        </div>
+
+    </div>
+
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -30,6 +95,30 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+
+    <script>
+
+        document.body.onload = function () {
+            setTimeout(function () {
+                document.querySelector(".loading").style.animationName = 'yuqol';
+            }, 7000);
+            setTimeout(function () {
+                document.querySelector(".loading").remove();
+            }, 4000);
+        }
+
+
+    </script>
 </body>
 
 </html>

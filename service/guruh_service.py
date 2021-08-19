@@ -17,4 +17,3 @@ class GuruhService():
 
     def update(self, guruh):
         return self.gr.update(guruh)
-
