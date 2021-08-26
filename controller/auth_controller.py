@@ -33,8 +33,11 @@ def registr():
         parol = request.form['parol']
         if login and parol and login and ism and familiya:
             u = User(ism,familiya,login, parol)
-            us.create(u)
-            return redirect('/login')
+            try:
+                us.create(u)
+                return redirect('/login')
+            except:
+                xabar = "Yangi qaytarilmas login kiriting"
 
         else:
             xabar = "Ro`yxatdan o`tishning iloji bo`lmadi !"
