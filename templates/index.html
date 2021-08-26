@@ -7,6 +7,8 @@
     <title>Bosh sahifa</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <style>
@@ -30,13 +32,13 @@
         margin: auto;
         width: 100px;
         height: 100px;
-        border-top: dashed 5px blue;
-        border-right: dashed 5px rgb(43, 255, 0);
-        border-bottom: dashed 5px rgb(255, 145, 0);
-        border-left: dashed 5px rgb(255, 0, 0);
-        border-radius: 50%;
-        margin-top: 280px;
-        animation: aylan 0.9s;
+        border-top: inset 3px black;
+        border-right: inset 3px black;
+        border-bottom: inset 3px black;
+        border-left: inset 3px black;
+        border-radius: 30%;
+        margin-top: 200px;
+        animation: aylan 0.95s;
         animation-iteration-count: infinite;
         animation-fill-mode: backwards;
     }
@@ -60,40 +62,30 @@
     h4 {
         color: white;
     }
-  
 </style>
 
 <body>
+
+    <form class="form-inline my-2 my-lg-0">
+        <input onkeyup="qidirish(this)" class="form-control mr-sm-2" type="search" placeholder="Qidiruv..."
+            aria-label="Search">
+    </form>
+
     <div style="background-color: rgba(255, 255, 255, 0.979);" class="loading">
-        <div></div>
+        <div></div><br>
         <h1 style="  color: black; font-family: cursive;">Iltimos kutib turing....</h1>
     </div>
     <div id="header">
 
         <div class="container">
             {% include "header.html" %}
-            <h1>Talabalar bilan ishlash bo`limi</h1>
-            <h1 style="text-align: center;font-family: cursive;">Talabalar bilan ishlash platformasiga hush kelibsiz</h1>
-            <ul>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="/yunalish" role="button">Yo`nalish</a><br><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="/guruh" role="button">Guruh</a><br><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-primary" href="/talaba" role="button">Talaba</a><br><br>
-               
-            </ul>
+
         </div>
 
     </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <p>
+        <i class="fa fa-eye"></i> {{kurishlar}}
+    </p>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -105,6 +97,33 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- tepaga chiqish tugmasi -->
+        <button onclick="topFunction()" style="position: fixed;z-index: 1000;bottom: 20px;right: 20px;display: none;"
+            id="topBtn" type="button" class="btn btn-primary">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </button>
+        <script src="./../../top.js"></script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script>
 

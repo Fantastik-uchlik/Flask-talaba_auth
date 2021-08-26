@@ -28,7 +28,7 @@
                 {% if guruh %}
                 <div class="card">
                     <h3>
-                        <div class="card-header">{{ guruh.id }} - id li guruhni tahrirlash </div>
+                        <div style="color:red;" class="card-header">{{ guruh.id }} - id li {{guruh.nom}} <span style="color:black">-guruhni tahrirlash</span> </div>
                     </h3>
                     <div class="card-body">
                         <form action="/guruh" method="post">
@@ -88,7 +88,7 @@
                         <form action="/guruh" method="post">
                             <div class="form-group">
                                 <label for="nom">Nom: </label>
-                                <input placeholder="Guruhni nomi yoki raqamini kiriting" class="form-control"
+                                <input required placeholder="Guruhni nomi yoki raqamini kiriting" class="form-control"
                                     type="text" name="nom" id="nom">
 
                             </div>
@@ -103,6 +103,17 @@
                                 </select>
                             </div>
 
+                            <label for="til">Til: </label>
+                           <select class="form-control" name="til" id="til">
+                                    <option value="" selected disabled hidden>Tilni tanlang</option>
+                                    <option value="O`zbek tili">O`zbek tili</option>
+                                    <option value="Русский">Русский</option>
+                                    <option value="Qoraqalpoq tili">Qoraqalpoq tili</option>
+                                    <option value="Ingliz tili">Ingliz tili</option>
+                                    <option value="boshqa tillar">boshqa tillar</option>
+
+
+                           </select>
 
                             <div class="form-group">
                                 <label for="yil">Yil: </label>
@@ -129,7 +140,7 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Nom</th>
+                                        <th>Raqami</th>
                                         <th>Yunalish</th>
                                         <th>Til</th>
                                         <th>Yil</th>
@@ -148,10 +159,15 @@
                                         <td>{{y.til}}</td>
                                         <td>{{y.yil}}</td>
                                         <td>
-                                            <a href="/guruh/ochirish?id={{y.id}}"><i style="color: red;"
-                                                    class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+
                                             <a href="/guruh?tahrirlash={{y.id}}"><i style="color: green;"
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                             <a class="text-danger" data-toggle="modal" data-target="#exampleModal"
+                                             data-id="{{y.id}}" data-nom="{{y.nom}}">
+                                              <i class="fa fa-trash" aria-hidden="true"></i>
+
+                                            </a>
                                         </td>
                                         </td>
                                     </tr>
@@ -170,6 +186,50 @@
     </div>
     </div>
     </div>
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Siz rostdan ham  <span style="color:red" id="name"></span>- guruhni  o'chirmoqchimisiz?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+          <a href="/guruh/ochirish/" class="btn btn-danger">O'chirish</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id') ;
+    var nom = button.data('nom')
+    var modal = $(this)
+    modal.find('.modal-footer a').attr('href', '/guruh/ochirish?id='+id)
+     modal.find('.modal-content #name').text(nom)
+    })
+    </script>
 </body>
 
 </html>

@@ -14,19 +14,19 @@
 
 </head>
 
-<body> 
-     {% include "header.html" %}
+<body>
+    {% include "header.html" %}
     <div class="container">
-      
+
         <h1>Yunalishlar</h1>
-        <div class="col">
+        <div class="row">
             <hr>
             {% if yunalish %}
 
             <div class="col-12 col-md-6">
                 <div class="card">
 
-                    <div class="card-header">{{yunalish.id}} - id li yunalishni tahrirlash</div>
+                    <div style="color:red;" class="card-header">{{yunalish.id}} - id li {{ yunalish.nom }} <span style="color:black">-yo`nalishni tahrirlash</span></div>
                     <div class="card-body">
                         <form action="/yunalish/tahrirlash" method="post">
                             <div class="form-group">
@@ -36,7 +36,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="nom">Nom: </label>
-                                <input class="form-control" type="text" name="nom" id="nom" value="{{yunalish.nom}}" required>
+                                <input class="form-control" type="text" name="nom" id="nom" value="{{yunalish.nom}}"
+                                    required>
                             </div>
                             <div class="form-group">
                                 <label for="kod">Kod: </label>
@@ -47,13 +48,15 @@
                                 <textarea class="form-control" name="izoh" id="izoh" data-value="{{yunalish.izoh}}">
                 </textarea>
                             </div>
-                            <input type="submit" value="Tahrirlash">
-                            <button><a href="/yunalish">Bekor qilish</a></button>
+                             <input class="btn btn-primary" type="submit" value="Tahrirlash">
+                            <a class="btn btn-secondary" href="/guruh">Bekor qilish </a>
+
                         </form>
 
                     </div>
                 </div>
             </div>
+
 
 
 
@@ -68,7 +71,7 @@
                         <form action="/yunalish" method="post">
                             <div class="form-group">
                                 <label for="nom">Nom: </label>
-                                <input class="form-control" placeholder="Yunalish nomi" type="text" name="nom" id="nom">
+                                <input class="form-control" required placeholder="Yunalish nomi" type="text" name="nom" id="nom">
                             </div>
                             <div class="form-group">
                                 <label for="kod">Kod: </label>
@@ -76,17 +79,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="izoh">Izoh: </label>
-                                <textarea class="form-control" placeholder="Fikringizni qoldiring" name="izoh"
+                                <textarea class="form-control" placeholder="Fikringizni qoldiring..." name="izoh"
                                     id="izoh"> </textarea>
                             </div>
-                            <input type="submit" value="Saqlash">
-                            <input type="reset" value="Tozalash">
+                           <input class="btn btn-primary" type="submit" value="Saqlash">
+                            <input class="btn btn-secondary" type="reset" value="Tozalash">
                         </form>
                     </div>
                 </div>
+            </div>
 
-                {% endif %}
-               
+            {% endif %}
+
             <div class="col-12 col-md-6">
 
                 <h2 style="color: blue;"><i class="fa fa-server" aria-hidden="true"></i>
@@ -114,10 +118,16 @@
                                 <td>{{y.kod}}</td>
                                 <td>{{y.izoh}}</td>
                                 <td>
-                                    <a href="/yunalish/ochirish?id={{y.id}}"><i style="color: red;" class="fa fa-trash"
-                                            aria-hidden="true"></i></a>&nbsp;&nbsp;
+
                                     <a href="/yunalish?tahrirlash={{y.id}}"><i style="color: green;"
                                             class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+
+                                    <a class="text-danger" data-toggle="modal" data-target="#exampleModal"
+                                             data-id="{{y.id}}" data-nom="{{y.nom}}">
+
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+
+                </a>
                                 </td>
                             </tr>
                             {% endfor %}
@@ -128,21 +138,50 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Siz rostdan ham  <span style="color:red" id="name"></span> yo`nalishini  o'chirmoqchimisiz?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+          <a href="/yunalish/ochirish/" class="btn btn-danger">O'chirish</a>
+        </div>
+      </div>
     </div>
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
+  </div>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var id = button.data('id') ;
+    var nom = button.data('nom')
+    var modal = $(this)
+    modal.find('.modal-footer a').attr('href', '/yunalish/ochirish?id='+id)
+     modal.find('.modal-content #name').text(nom)
+    })
+    </script>
 </body>
 
 </html>

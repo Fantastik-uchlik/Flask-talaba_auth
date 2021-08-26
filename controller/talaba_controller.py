@@ -3,8 +3,12 @@ from flask import Blueprint, render_template, request, redirect, url_for
 
 from model.talaba import Talaba
 from service.talaba_service import TalabaService
+from service.yunalish_service import YunalishService
+from service.guruh_service import GuruhService
 
 ts = TalabaService()
+ys = YunalishService()
+gs = GuruhService()
 talaba_url = Blueprint("talaba", __name__, template_folder='../templates')
 
 
@@ -31,7 +35,7 @@ def delete():
 @talaba_url.route("/talaba/tahrirlash", methods = ['POST'])
 def update():
     t = request.form
-    talaba = Talaba(t['ism'], t['familiya'], t['telefon'])
+    talaba = Talaba(t['ism'], t['familiya'],  t['sharif'], t['telefon'], int(t['yunalish']), int(t['guruh']))
     talaba.id = t['id']
     ts.update(talaba)
     return redirect("/talaba")
@@ -39,13 +43,17 @@ def update():
 
 def royxat():
     talabalar = ts.getAll()
-    return render_template("talaba.html", talabalar=talabalar)
+    yunalishlar = ys.getAll()
+    guruhlar = gs.getAll()
+    return render_template("talaba.html", talabalar=talabalar, yunalishlar=yunalishlar, guruhlar=guruhlar)
 
 
 def qoshish(t):
-    talaba = Talaba(t['ism'], t['familiya'], t['telefon'])
+    talaba = Talaba(t['ism'], t['familiya'], t['sharif'], t['telefon'], int(t['yunalish']), int(t['guruh']))
+    print(t)
     ts.create(talaba)
     return royxat()
+
 
 
 def ochirish(id):
@@ -55,5 +63,7 @@ def ochirish(id):
 
 def ozgartirish(t):
     talabalar = ts.getAll()
-    return render_template("talaba.html", talaba = t, talabalar = talabalar)
+    yunalishlar = ys.getAll()
+    guruhlar = gs.getAll()
+    return render_template("talaba.html",talaba=t, talabalar=talabalar, yunalishlar=yunalishlar, guruhlar=guruhlar)
 

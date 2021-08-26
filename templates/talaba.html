@@ -28,7 +28,8 @@
                 {% if talaba %}
                 <div class="card">
                     <h3>
-                        <div class="card-header">{{ talaba.id }} - id li talabani tahrirlash </div>
+                        <div style="color:red;" class="card-header">{{ talaba.id }} - id li <span style="color:black">
+                                talaba </span> {{ talaba.ism }} <span style="color:black">ni tahrirlash</span></div>
                     </h3>
                     <div class="card-body">
                         <form action="/talaba/tahrirlash" method="post">
@@ -45,14 +46,49 @@
                                 <label for="familiya">Familiya: </label>
                                 <input type="text" class="form-control" name="familiya" id="familiya"
                                     value="{{talaba.familiya}}">
+
+
+                            </div>
+                            <div class="form-group">
+                                <label for="sharif">Sharif: </label>
+                                <input type="text" class="form-control" name="sharif" id="sharif"
+                                    value="{{talaba.sharif}}">
                             </div>
 
                             <div class="form-group">
                                 <label for="telefon">Telefon raqami: </label>
                                 <input name="telefon" class="form-control" id="telefon" value="{{talaba.telefon}}">
                             </div>
-                            <input type="submit" value="Tahrirlash">
-                            <button> <a href="/talaba">Bekor qilish</a></button>
+                            <div class="form-group">
+                                <label for="yunalish">Yo`nalish</label>
+                                <select class="form-control" name="yunalish" id="yunalish">
+                                    {% if yunalishlar %}
+                                    {% for y in yunalishlar %}
+
+
+                                    <option value="{{y.id}}">{{y.nom}}</option>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guruh">Guruhlar</label>
+                                <select class="form-control" name="guruh" id="guruh">
+                                    {% if guruhlar %}
+                                    {% for g in guruhlar %}
+
+
+                                    <option value="{{g.id}}">{{g.nom}}</option>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                </select>
+                            </div>
+
+                            <input class="btn btn-primary" type="submit" value="Tahrirlash">
+                            <a class="btn btn-secondary" href="/talaba">Bekor qilish </a>
                         </form>
                     </div>
                 </div>
@@ -62,26 +98,58 @@
                         <form action="/talaba" method="post">
                             <div class="form-group">
                                 <label for="ism">Ism: </label>
-                                <input class="form-control" placeholder="Ismini kiriting" type="text" name="ism"
-                                    id="ism">
+                                <input class="form-control" required placeholder="Ismini kiriting..." type="text"
+                                    name="ism" id="ism">
                             </div>
                             <div class="form-group">
                                 <label for="familiya">Familiya: </label>
-                                <input type="text" class="form-control" placeholder="Familiyani kiriting"
+                                <input type="text" class="form-control" required placeholder="Familiyani kiriting...."
                                     name="familiya" id="familiya">
+                                <div class="form-group">
+                                    <label for="sharif">Sharif: </label>
+                                    <input type="text" class="form-control" required
+                                        placeholder="Sharifini kiriting...." name="sharif" id="sharif">
+                                </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="telefon">Telefon raqami: </label>
-                                <input name="telefon" class="form-control" placeholder="Shaxsiy telefon raqam"
-                                    id="telefon">
+                                <input name="telefon" class="form-control" required
+                                    placeholder="Telefon raqamini kiriting..." id="telefon">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="yunalish">Yo`nalish</label>
+                                <select class="form-control" name="yunalish" id="yunalish">
+                                    {% if yunalishlar %}
+                                    {% for y in yunalishlar %}
+
+
+                                    <option value="{{y.id}}">{{y.nom}}</option>
+
+                                    {% endfor %}
+                                    {% endif %}
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guruh">Guruhlar</label>
+                                <select class="form-control" name="guruh" id="guruh">
+                                    {% if guruhlar %}
+                                    {% for g in guruhlar %}
+
+
+                                    <option value="{{g.id}}">{{g.nom}}</option>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                </select>
                             </div>
 
 
-                            <input type="submit" value="Saqlash"
-                                style="color: rgb(241, 241, 241);background-color: rgb(83, 182, 83);">
-                            <input type="reset" value="Tozalash"
-                                style="color: rgb(250, 250, 250);background-color: rgb(211, 84, 84);">
+                            <input class="btn btn-primary" type="submit" value="Saqlash">
+                            <input class="btn btn-secondary" type="reset" value="Tozalash">
                         </form>
                     </div>
                 </div>
@@ -101,7 +169,10 @@
                                         <th>Id</th>
                                         <th>Ism</th>
                                         <th>Familiya</th>
+                                        <th>Sharif</th>
                                         <th>Telefon</th>
+                                        <th>Yunalish</th>
+                                        <th>Guruh</th>
                                         <th>Amal</th>
                                         <th></th>
                                     </tr>
@@ -115,14 +186,20 @@
                                         <td>{{y.id}}</td>
                                         <td>{{y.ism}}</td>
                                         <td>{{y.familiya}}</td>
-
+                                        <td>{{y.sharif}}</td>
                                         <td>{{y.telefon}}</td>
+                                        <td>{{y.yunalish.nom}}</td>
+                                        <td>{{y.guruh.nom}}</td>
                                         <td>
-                                            <a href="/talaba/ochirish?id={{y.id}}"><i style="color: red;"
-                                                    class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+
                                             <a href="/talaba?tahrirlash={{y.id}}"><i style="color: green;"
                                                     class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                            <a class="text-danger" data-toggle="modal" data-target="#exampleModal"
+                                                data-id="{{y.id}}" data-ism="{{y.ism}}">
 
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+
+                                            </a>
 
                                         </td>
                                     </tr>
@@ -147,6 +224,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Siz rostdan ham talaba <span style="color:red"
+                            id="name"></span>ni o'chirmoqchimisiz?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
+                    <a href="/talaba/ochirish/" class="btn btn-danger">O'chirish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id');
+            var ism = button.data('ism')
+            var modal = $(this)
+            modal.find('.modal-footer a').attr('href', '/talaba/ochirish?id=' + id)
+            modal.find('.modal-content #name').text(ism)
+        })
+    </script>
 </body>
 
 </html>

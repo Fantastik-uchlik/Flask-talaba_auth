@@ -33,7 +33,7 @@ def ozgartirish(g):
 @guruh_url.route("/guruh/tahrirlash", methods = ['POST'])
 def update():
     g = request.form
-    guruh = Guruh(g['nom'], g['yunalish_id'], g['yil'])
+    guruh = Guruh(g['nom'], g['yunalish_id'], g['til'], g['yil'])
     guruh.id = g['id']
     gs.update(guruh)
     return redirect('/guruh')
@@ -51,7 +51,7 @@ def royxat():
 
 
 def qoshish(g):
-    guruh = Guruh(g['nom'], g['yunalish_id'], g['yil'])
+    guruh = Guruh(g['nom'], g['yunalish_id'], g['til'],  g['yil'])
     gs.create(guruh)
     return royxat()
 

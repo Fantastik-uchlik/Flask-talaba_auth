@@ -23,6 +23,9 @@ class TalabaRepo():
         t = self.findById(talaba.id)
         t.ism = talaba.ism
         t.familiya = talaba.familiya
+        t.sharif = talaba.sharif
         t.telefon = talaba.telefon
+        t.yunalish_id = talaba.yunalish_id
+        t.guruh_id = talaba.guruh_id
         db.session.commit()
         return True
