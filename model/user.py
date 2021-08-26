@@ -18,4 +18,5 @@ class User(db.Model,UserMixin):
         self.login = login
         self.parol = parol
 
-
+    def get_id(self):
+        return self.login

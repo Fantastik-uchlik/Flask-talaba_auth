@@ -1,4 +1,4 @@
-
+import flask_login
 from flask import Blueprint, render_template, request, redirect, url_for
 
 from model.talaba import Talaba
@@ -14,6 +14,7 @@ talaba_url = Blueprint("talaba", __name__, template_folder='../templates')
 
 
 @talaba_url.route("/talaba", methods=['GET', 'POST', 'DELETE', 'UPDATE'])
+@flask_login.login_required
 def index():
     if request.method == 'GET':
         tahrirlashId = request.args.get('tahrirlash')
@@ -29,10 +30,12 @@ def index():
 
 
 @talaba_url.route("/talaba/ochirish")
+@flask_login.login_required
 def delete():
     return ochirish(request.args.get('id'))
 
 @talaba_url.route("/talaba/tahrirlash", methods = ['POST'])
+@flask_login.login_required
 def update():
     t = request.form
     talaba = Talaba(t['ism'], t['familiya'],  t['sharif'], t['telefon'], int(t['yunalish']), int(t['guruh']))

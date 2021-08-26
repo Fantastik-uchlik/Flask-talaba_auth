@@ -1,4 +1,5 @@
-from flask import Flask
+import flask
+from flask import Flask, url_for
 from flask_session import Session
 
 from config.data_source import DATABASE_URL, SECRET_KEY, db
@@ -10,6 +11,8 @@ from controller.yunalish_controller import yunalish_url
 from model.user import User
 from public_urls import public_url
 from flask_login import LoginManager
+
+from service.user_service import UserService
 
 app = Flask(__name__)
 
@@ -33,13 +36,25 @@ Session(app)
 
 
 
-
+us = UserService()
 login_manager = LoginManager()
 login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    user = us.getByLogin(user_id)
+    return user
 
+
+@login_manager.request_loader
+def request_loader(request):
+    login = request.form.get('login')
+    user = us.getByLogin(login)
+
+    return user
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    print(flask.request.full_path)
+    return flask.redirect(url_for("auth.login", next=flask.request.endpoint, xabar="Avval tizimga kiring"))
 
 
 if __name__ == "__main__":

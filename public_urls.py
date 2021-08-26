@@ -6,7 +6,7 @@ public_url = Blueprint("",__name__, template_folder='templates')
 
 
 
-
+@public_url.route('/index')
 @public_url.route("/")
 def index():
     #soni = request.cookies.get("kurishlar")

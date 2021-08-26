@@ -65,7 +65,7 @@
 </style>
 
 <body>
-
+{% include "header.html" %}
     <form class="form-inline my-2 my-lg-0">
         <input onkeyup="qidirish(this)" class="form-control mr-sm-2" type="search" placeholder="Qidiruv..."
             aria-label="Search">
@@ -75,17 +75,7 @@
         <div></div><br>
         <h1 style="  color: black; font-family: cursive;">Iltimos kutib turing....</h1>
     </div>
-    <div id="header">
 
-        <div class="container">
-            {% include "header.html" %}
-
-        </div>
-
-    </div>
-    <p>
-        <i class="fa fa-eye"></i> {{kurishlar}}
-    </p>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -130,10 +120,10 @@
         document.body.onload = function () {
             setTimeout(function () {
                 document.querySelector(".loading").style.animationName = 'yuqol';
-            }, 7000);
+            }, 1000);
             setTimeout(function () {
                 document.querySelector(".loading").remove();
-            }, 4000);
+            }, 1000);
         }
 
 
