@@ -9,7 +9,6 @@ public_url = Blueprint("",__name__, template_folder='templates')
 
 @public_url.route('/index')
 @public_url.route("/")
-@flask_login.login_required
 def index():
     #soni = request.cookies.get("kurishlar")
     soni = session.get("kurishlar")

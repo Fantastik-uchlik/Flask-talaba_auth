@@ -14,8 +14,8 @@ us = UserService()
 def login():
     xabar = request.args.get("xabar")
     next = request.args.get("next")
-    if next is None or next == '' or next == 'None':
-        next = "index"
+    # if next is None or next == '' or next == 'None':
+    next = "admin.index"
     if request.method == 'POST':
         login = request.form['login']
         parol = request.form['parol']

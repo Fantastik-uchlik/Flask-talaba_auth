@@ -1,13 +1,13 @@
 import flask
 from flask import Flask, url_for
+
+from controller.admin.dashboard_controller import admin_url
 from flask_session import Session
 
 from config.data_source import DATABASE_URL, SECRET_KEY, db
 
 from controller.auth_controller import auth_url
-from controller.guruh_controller import guruh_url
-from controller.talaba_controller import talaba_url
-from controller.yunalish_controller import yunalish_url
+
 from public_urls import public_url
 
 
@@ -18,9 +18,7 @@ from service.user_service import UserService
 app = Flask(__name__)
 
 app.register_blueprint(public_url)
-app.register_blueprint(yunalish_url)
-app.register_blueprint(guruh_url)
-app.register_blueprint(talaba_url)
+app.register_blueprint(admin_url)
 app.register_blueprint(auth_url)
 
 
