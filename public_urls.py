@@ -1,5 +1,6 @@
 from datetime import timedelta
 
+import flask_login
 from flask import render_template, Blueprint, make_response, request, session
 
 public_url = Blueprint("",__name__, template_folder='templates')
@@ -8,6 +9,7 @@ public_url = Blueprint("",__name__, template_folder='templates')
 
 @public_url.route('/index')
 @public_url.route("/")
+@flask_login.login_required
 def index():
     #soni = request.cookies.get("kurishlar")
     soni = session.get("kurishlar")

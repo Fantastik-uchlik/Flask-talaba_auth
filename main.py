@@ -3,13 +3,14 @@ from flask import Flask, url_for
 from flask_session import Session
 
 from config.data_source import DATABASE_URL, SECRET_KEY, db
-from controller.auth_controller import auth_url
 
+from controller.auth_controller import auth_url
 from controller.guruh_controller import guruh_url
 from controller.talaba_controller import talaba_url
 from controller.yunalish_controller import yunalish_url
-from model.user import User
 from public_urls import public_url
+
+
 from flask_login import LoginManager
 
 from service.user_service import UserService
@@ -39,6 +40,8 @@ Session(app)
 us = UserService()
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     user = us.getByLogin(user_id)
@@ -49,11 +52,11 @@ def load_user(user_id):
 def request_loader(request):
     login = request.form.get('login')
     user = us.getByLogin(login)
-
     return user
+
+
 @login_manager.unauthorized_handler
 def unauthorized_handler():
-    print(flask.request.full_path)
     return flask.redirect(url_for("auth.login", next=flask.request.endpoint, xabar="Avval tizimga kiring"))
 
 
