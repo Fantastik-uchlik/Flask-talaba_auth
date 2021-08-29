@@ -13,7 +13,7 @@
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
                         <li class="breadcrumb-item active">
-                            <a href="/guruh">Guruh</a>
+                            <a href="/admin/guruh">Guruh</a>
                             </li>
                     </ol>
                 </div><!-- /.col -->
@@ -39,7 +39,7 @@
                                     style="color:black">-guruhni tahrirlash</span></div>
                         </h3>
                         <div class="card-body">
-                            <form action="/guruh" method="post">
+                            <form action="/admin/guruh" method="post">
                                 <div class="form-group">
                                     <label for="id">ID: </label>
                                     <input class="form-control" type="text" value="{{guruh.id}}" name="id" id="id"
@@ -84,7 +84,7 @@
                                     <input class="form-control" name="yil" id="yil" value="{{guruh.yil}}"/>
                                 </div>
                                 <input class="btn btn-primary" type="submit" value="Tahrirlash">
-                                <a class="btn btn-secondary" href="/guruh">Bekor qilish </a>
+                                <a class="btn btn-secondary" href="/admin/guruh">Bekor qilish </a>
 
                             </form>
                         </div>
@@ -94,7 +94,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <form action="/guruh" method="post">
+                            <form action="/admin/guruh" method="post">
                                 <div class="form-group">
                                     <label for="nom">Nom: </label>
                                     <input required placeholder="Guruhni nomi yoki raqamini kiriting"
@@ -169,7 +169,7 @@
                                         <td>{{y.yil}}</td>
                                         <td>
 
-                                            <a href="/guruh?tahrirlash={{y.id}}"><i style="color: green;"
+                                            <a href="/admin/guruh?tahrirlash={{y.id}}"><i style="color: green;"
                                                                                     class="fa fa-pencil-square-o"
                                                                                     aria-hidden="true"></i></a>
 
@@ -221,7 +221,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
-                <a href="/guruh/ochirish/" class="btn btn-danger">O'chirish</a>
+                <a href="/admin/guruh/ochirish/" class="btn btn-danger">O'chirish</a>
             </div>
         </div>
     </div>
@@ -232,7 +232,7 @@
     var id = button.data('id') ;
     var nom = button.data('nom')
     var modal = $(this)
-    modal.find('.modal-footer a').attr('href', '/guruh/ochirish?id='+id)
+    modal.find('.modal-footer a').attr('href', '/admin/guruh/ochirish?id='+id)
      modal.find('.modal-content #name').text(nom)
     })
 

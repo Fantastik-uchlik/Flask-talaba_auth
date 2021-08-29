@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
-                        <li class="breadcrumb-item"><a href="/yunalish">Yunalishlar</a></li>
+                        <li class="breadcrumb-item"><a href="/admin/yunalish">Yunalishlar</a></li>
 
                     </ol>
                 </div><!-- /.col -->
@@ -34,7 +34,7 @@
                         <div style="color:red;" class="card-header">{{yunalish.id}} - id li {{ yunalish.nom }} <span
                                 style="color:black">-yo`nalishni tahrirlash</span></div>
                         <div class="card-body">
-                            <form action="/yunalish/tahrirlash" method="post">
+                            <form action="/admin/yunalish/tahrirlash" method="post">
                                 <div class="form-group">
                                     <label for="id">ID: </label>
                                     <input class="form-control" type="text" name="id" id="id" value="{{yunalish.id}}"
@@ -56,7 +56,7 @@
                 </textarea>
                                 </div>
                                 <input class="btn btn-primary" type="submit" value="Tahrirlash">
-                                <a class="btn btn-secondary" href="/guruh">Bekor qilish </a>
+                                <a class="btn btn-secondary" href="/admin/yunalish">Bekor qilish </a>
 
                             </form>
 
@@ -73,7 +73,7 @@
                         Yo`nalish qo'shish</h2>
                     <div class="card">
                         <div class="card-body">
-                            <form action="/yunalish" method="post">
+                            <form action="/admin/yunalish" method="post">
                                 <div class="form-group">
                                     <label for="nom">Nom: </label>
                                     <input class="form-control" required placeholder="Yunalish nomi" type="text"
@@ -126,7 +126,7 @@
                                 <td>{{y.izoh}}</td>
                                 <td>
 
-                                    <a href="/yunalish?tahrirlash={{y.id}}"><i style="color: green;"
+                                    <a href="/admin/yunalish?tahrirlash={{y.id}}"><i style="color: green;"
                                                                                class="fa fa-pencil-square-o"
                                                                                aria-hidden="true"></i></a>
 
@@ -176,7 +176,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Bekor qilish</button>
-                <a href="/yunalish/ochirish/" class="btn btn-danger">O'chirish</a>
+                <a href="/admin/yunalish/ochirish/" class="btn btn-danger">O'chirish</a>
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@
     var id = button.data('id') ;
     var nom = button.data('nom')
     var modal = $(this)
-    modal.find('.modal-footer a').attr('href', '/yunalish/ochirish?id='+id)
+    modal.find('.modal-footer a').attr('href', '/admin/yunalish/ochirish?id='+id)
      modal.find('.modal-content #name').text(nom)
     })
 

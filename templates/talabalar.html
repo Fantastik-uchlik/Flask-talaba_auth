@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Talabalar ro'yxati</title>
+</head>
+<body>
+<h2 style="color: blue;"><i class="fa fa-server" aria-hidden="true"></i> Talabalar ro'yxati</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ism</th>
+                    <th>Familiya</th>
+                    <th>Sharif</th>
+                    <th>Telefon</th>
+                    <th>Yunalish</th>
+                    <th>Guruh</th>
+                    <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% if talabalar %}
+                {% for y in talabalar %}
+
+                <tr>
+                    <td>{{y.id}}</td>
+                    <td>{{y.ism}}</td>
+                    <td>{{y.familiya}}</td>
+                    <td>{{y.sharif}}</td>
+                    <td>{{y.telefon}}</td>
+                    <td>{{y.yunalish.nom}}</td>
+                    <td>{{y.guruh.nom}}</td>
+
+                </tr>
+                {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

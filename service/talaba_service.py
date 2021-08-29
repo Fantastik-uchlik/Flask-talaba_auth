@@ -4,8 +4,8 @@ from repo.talaba_repo import TalabaRepo
 
 class TalabaService():
     tr = TalabaRepo()
-    def getAll(self):
-        return self.tr.findAll()
+    def getAll(self, page, size):
+        return self.tr.findAll(page, size)
 
     def create(self, talaba):
         return self.tr.create(talaba)
@@ -16,3 +16,5 @@ class TalabaService():
         return self.tr.findById(tahrirlashId)
     def update(self, talaba):
         return self.tr.update(talaba)
+    def count(self):
+        return self.tr.count()

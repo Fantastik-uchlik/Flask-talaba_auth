@@ -12,14 +12,13 @@ gs = GuruhService()
 talaba_url = Blueprint("talaba", __name__, template_folder='../../templates/admin/')
 
 
-
 @talaba_url.route("/admin/talaba", methods=['GET', 'POST', 'DELETE', 'UPDATE'])
 @flask_login.login_required
 def index():
     if request.method == 'GET':
         tahrirlashId = request.args.get('tahrirlash')
         if tahrirlashId:
-            y=ts.getById(tahrirlashId)
+            y = ts.getById(tahrirlashId)
             if y:
                 return ozgartirish(y)
         return royxat()
@@ -34,21 +33,31 @@ def index():
 def delete():
     return ochirish(request.args.get('id'))
 
-@talaba_url.route("/admin/talaba/tahrirlash", methods = ['POST'])
+
+@talaba_url.route("/admin/talaba/tahrirlash", methods=['POST'])
 @flask_login.login_required
 def update():
     t = request.form
-    talaba = Talaba(t['ism'], t['familiya'],  t['sharif'], t['telefon'], int(t['yunalish']), int(t['guruh']))
+    talaba = Talaba(t['ism'], t['familiya'], t['sharif'], t['telefon'], int(t['yunalish']), int(t['guruh']))
     talaba.id = t['id']
     ts.update(talaba)
-    return redirect("/talaba")
+    return redirect("/admin/talaba")
 
 
 def royxat():
-    talabalar = ts.getAll()
     yunalishlar = ys.getAll()
     guruhlar = gs.getAll()
-    return render_template("talaba.html", talabalar=talabalar, yunalishlar=yunalishlar, guruhlar=guruhlar)
+
+    page = request.args.get('page', type=int, default=1)
+    size = request.args.get('size', type=int, default=10)
+
+    talabalar = ts.getAll(page, size)
+
+
+    return render_template('talaba.html',
+                           talabalar=talabalar,
+                           yunalishlar=yunalishlar, guruhlar=guruhlar,
+                           )
 
 
 def qoshish(t):
@@ -58,15 +67,14 @@ def qoshish(t):
     return royxat()
 
 
-
 def ochirish(id):
     if id:
         ts.deleteById(id)
-    return redirect("/talaba")
+    return redirect("/admin/talaba")
+
 
 def ozgartirish(t):
     talabalar = ts.getAll()
     yunalishlar = ys.getAll()
     guruhlar = gs.getAll()
-    return render_template("talaba.html",talaba=t, talabalar=talabalar, yunalishlar=yunalishlar, guruhlar=guruhlar)
-
+    return render_template("talaba.html", talaba=t, talabalar=talabalar, yunalishlar=yunalishlar, guruhlar=guruhlar)

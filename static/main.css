@@ -1,20 +1,15 @@
-table{
-    width: 100%;
-    border-collapse: collapse;
-
+.pagination-page-info {
+    padding: .6em;
+    padding-left: 0;
+    width: 40em;
+    margin: .5em;
+    margin-left: 0;
+    font-size: 12px;
 }
-td, th{
-    border: solid 1px #ddd;
-    padding: 5px;
-    text-align: center;
-}
-.btn{
-    text-decoration: none;
-    background-color: dodgerblue;
-    padding: 10px;
-    box-shadow: 1px 1px 9px 2px gray;
-    display: inline-block;
-    margin: 2px;
-    color: white;
-    border: none;
+.pagination-page-info b {
+    color: black;
+    background: #6aa6ed;
+    padding-left: 2px;
+    padding: .1em .25em;
+    font-size: 150%;
 }
