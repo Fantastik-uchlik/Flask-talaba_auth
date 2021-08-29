@@ -8,7 +8,6 @@ venv/
 .venv/
 flask_session/
 env*
-dist/
 build/
 *.egg
 *.egg-info/
