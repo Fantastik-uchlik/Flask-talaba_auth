@@ -59,4 +59,4 @@ def qoshish(g):
 def ochirish(id):
     if id:
         gs.deleteById(id)
-    return redirect("/guruh")
+    return redirect("/admin/guruh")
