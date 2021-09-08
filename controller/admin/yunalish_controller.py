@@ -37,7 +37,7 @@ def update():
     yunalish = Yunalish(y['nom'], y['kod'], y['izoh'])
     yunalish.id = y['id']
     ys.update(yunalish)
-    return redirect("/yunalish")
+    return redirect("/admin/yunalish")
 
 
 
@@ -60,7 +60,7 @@ def qoshish(y):
 def ochirish(id):
     if id:
         ys.deleteById(id)
-    return redirect("/yunalish")
+    return redirect("/admin/yunalish")
 
 def ozgartirish(y):
     yunalishlar = ys.getAll()
